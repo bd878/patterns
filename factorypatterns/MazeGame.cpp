@@ -1,6 +1,7 @@
 #include "MazeGame.h"
 #include "Wall.h"
 #include "Door.h"
+#include "Room.h"
 
 Maze* MazeGame::CreateMaze() {
   Maze* aMaze = new Maze;

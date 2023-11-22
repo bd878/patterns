@@ -10,7 +10,7 @@ private:
 };
 
 void Decorator::Draw() {
-  _comopnent->Draw();
+  _component->Draw();
 }
 
 void Decorator::Resize() {

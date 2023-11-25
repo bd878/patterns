@@ -19,4 +19,19 @@ void FontDialogDirector::CreateWidgets() {
   _cancel = new Button(this);
   _fontList = new ListBox(this);
   _fontName = new EntryField(this);
+
+  // поместить в список названия шрифтов
+  // разместить все виджеты в диалоговом окне
+}
+
+void FontDialogDirector::WidgetChanged (
+  Widget* theChangedWidget
+) {
+  if (theChangedWidget == _fontList) {
+    _fontName->SetText(_fontList->GetSelection());
+  } else if (theChangedWidget == _ok) {
+    // изменить шрифт, уничтожить диалоговое окно
+  } else if (theChangedWidget == _cancel) {
+    // уничтожить диалоговое окно
+  }
 }

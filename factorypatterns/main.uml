@@ -1,0 +1,5 @@
+@startuml
+class MapSite {
+  Enter()
+}
+@enduml

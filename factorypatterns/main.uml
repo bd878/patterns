@@ -1,5 +1,30 @@
 @startuml
-class MapSite {
+' skinparam groupInheritance 3
+
+MapSite <|-- Room
+MapSite <|-- Wall
+MapSite <|-- Door
+Room::SetSide --> MapSite : Стороны
+Maze::AddRoom --> Room : Комнаты
+
+interface MapSite {
+  {abstract} Enter()
+}
+class Maze {
+  AddRoom()
+  RoomNo()
+}
+class Room {
   Enter()
+  SetSide()
+  GetSide()
+  roomNumber : Integer
+}
+class Wall {
+  Enter()
+}
+class Door {
+  Enter()
+  isOpen : Boolean
 }
 @enduml

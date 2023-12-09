@@ -1,0 +1,61 @@
+@startuml
+skinparam class {
+  linetype polyline
+  groupInheritance 2
+}
+Title Abstract factory pattern
+
+object MotifScrollBar
+object MotifWindow
+object PMScrollBar
+object PMWindow
+object Client
+
+interface WidgetFactory {
+  {abstract} CreateScrollBar()
+  {abstract} CreateWindow()
+}
+interface Window {}
+interface ScrollBar {}
+class MotifWidgetFactory {
+  CreateScrollBar()
+  CreateWindow()
+}
+class PMWidgetFactory {
+  CreateScrollBar()
+  CreateWindow()
+}
+
+hide WidgetFactory attributes
+hide MotifWidgetFactory attributes
+hide PMWidgetFactory attributes
+hide PMWindow attributes
+hide PMScrollBar attributes
+hide MotifScrollBar attributes
+hide MotifWindow attributes
+hide Client attributes
+hide Window circle
+hide Window members
+hide ScrollBar circle
+hide ScrollBar members
+
+MotifWidgetFactory -r--|> WidgetFactory 
+PMWidgetFactory -r--|> WidgetFactory
+MotifWidgetFactory ..> MotifScrollBar
+MotifWidgetFactory ..> MotifWindow
+PMWidgetFactory ..> PMWindow
+PMWidgetFactory ..> PMScrollBar
+Client -l-> WidgetFactory
+Client -d-> Window
+Client -d-> ScrollBar
+PMScrollBar --|> ScrollBar
+MotifScrollBar --|> ScrollBar
+PMWindow --|> Window
+MotifWindow --|> Window
+
+legend
+Classes and objects from some
+doc editor GUI interfaces. It is
+independent from concrete classes
+end legend
+@enduml

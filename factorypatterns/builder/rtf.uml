@@ -1,0 +1,62 @@
+@startuml
+skinparam groupInheritance 2
+skinparam linetype polyline
+skinparam packageStyle rectangle
+hide empty members
+
+object ASCIIText
+object TeXText
+object TextWidget
+
+class RTFReader {
+  ParseRTF()
+}
+
+package Строители {
+  class ASCIIConverter {
+    ConvertCharacter(char)
+    GetASCIIText()
+  }
+
+  class TeXConverter {
+    ConvertCharacter(char)
+    ConvertParagraph()
+    ConvertFontChange(Font)
+    GetTeXText()
+  }
+
+  class TextWidgetConverter {
+    ConvertCharacter(char)
+    ConvertParagraph()
+    ConvertFontChange(Font)
+    GetTextWidget()
+  }
+
+  interface TextConverter {
+    {abstract} ConvertCharacter(char)
+    {abstract} ConvertFontChange(Font)
+    {abstract} ConvertParagraph()
+  }
+}
+
+note left of RTFReader
+  while (t = получить следующую лексему) {
+    switch t.Type {
+      CHAR:
+        builder->ConvertCharacter(t.Char)
+      FONT:
+        builder->ConvertFontChange(t.Font)
+      PARA:
+        builder->ConvertParagraph()
+    }
+  }
+end note
+
+RTFReader "builder" o-r-> TextConverter : \t\t
+ASCIIConverter -u-> TextConverter
+TeXConverter -u-> TextConverter
+TextWidgetConverter -u-> TextConverter
+ASCIIConverter .d.> ASCIIText
+TeXConverter .d.> TeXText
+TextWidgetConverter .d.> TextWidget
+@enduml

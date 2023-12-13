@@ -1,0 +1,28 @@
+@startuml
+object Product
+
+interface Builder {
+  {abstract} BuildPart()
+}
+class Director {
+  Construct()
+}
+class ConcreteBuilder {
+  BuildPart()
+  GetResult()
+}
+
+hide Builder attributes
+hide Director attributes
+hide ConcreteBuilder attributes
+hide Product attributes
+
+note bottom of Director 
+  Для всех объектов в структуре {
+    builder->BuildPart()
+  }
+end note
+Director "builder" o-r-> Builder : \t\t\t
+Builder <|-d- ConcreteBuilder
+ConcreteBuilder .r.> Product
+@enduml

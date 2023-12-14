@@ -1,0 +1,42 @@
+@startuml
+header Диаграмма последовательности
+footer Page %page% of %lastpage%
+title Паттерн "Строитель"
+
+actor aClient
+participant aDirector
+participant aConcreteBuilder
+
+activate aClient
+aClient --> aConcreteBuilder : new ConcreteBuilder
+activate aConcreteBuilder
+||5||
+
+deactivate aConcreteBuilder
+aClient --> aDirector : new Director(aConcreteBuilder)
+activate aDirector
+||5||
+deactivate aDirector
+||5||
+aClient -> aDirector : Construct()
+activate aDirector
+aDirector -> aConcreteBuilder : BuildPartA()
+activate aConcreteBuilder
+||5||
+deactivate aConcreteBuilder
+aDirector -> aConcreteBuilder : BuildPartB()
+activate aConcreteBuilder
+||5||
+deactivate aConcreteBuilder
+aDirector -> aConcreteBuilder : BuildPartC()
+activate aConcreteBuilder
+||5||
+deactivate aConcreteBuilder
+||5||
+deactivate aDirector
+aClient -> aConcreteBuilder : GetResult()
+activate aConcreteBuilder
+||5||
+deactivate aConcreteBuilder
+deactivate aClient
+@enduml

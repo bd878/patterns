@@ -1,0 +1,38 @@
+@startuml
+skinparam packageStyle rectangle
+hide empty members
+
+object MyDocument
+
+abstract class Document {
+  {abstract} Open()
+  {abstract} Close()
+  Save()
+  Revert()
+}
+
+abstract class Application {
+  {abstract} CreateDocument()
+  NewDocument()
+  OpenDocument()
+}
+
+class MyApplication {
+  CreateDocument()
+}
+
+note right of Application::NewDocument()
+  Document* doc = CreateDocument();
+  docs.Add(doc);
+  doc->Open();
+end note
+
+note right of MyApplication::CreateDocument()
+  return new MyDocument
+end note
+
+Application "docs" o-l-> Document : \t\t
+MyDocument -u-> Document
+MyApplication -u-> Application
+MyApplication .l.> MyDocument : \t\t
+@enduml

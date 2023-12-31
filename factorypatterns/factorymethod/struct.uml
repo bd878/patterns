@@ -1,0 +1,65 @@
+@startuml
+hide empty members
+
+abstract class Product
+
+abstract class Creator {
+  {abstract} FactoryMethod()
+  AnOperation()
+  GetProduct()
+}
+
+note top of Creator
+  class Creator {
+    public:
+      Product* GetProduct();
+    protected:
+      virtual Product* CreateProduct();
+    private:
+      Product* _product;
+  };
+
+  Product* Creator::GetProduct() {
+    if (_product == 0) {
+      _product = CreateProduct();
+    }
+    return _product;
+  }
+end note
+
+note right of Creator
+  class Creator {
+    public:
+      virtual Product* Create(ProductId);
+  };
+
+  Product* Creator::Create(ProductId id) {
+    if (id == MINE) return new MyProduct;
+    if (id == YOURS) return new YourProduct;
+    // выполнить для всех остальных продуктов
+
+    return 0;
+  }
+end note
+
+object ConcreteProduct
+
+class ConcreteCreator {
+  FactoryMethod()
+}
+
+note right of Creator::FactoryMethod
+  ...
+  product = FactoryMethod() 
+  ...
+end note
+
+note right of ConcreteCreator
+  return new ConcreteProduct
+end note
+
+ConcreteProduct -u-|> Product
+ConcreteCreator -u-|> Creator
+ConcreteCreator -l-> ConcreteProduct
+
+@enduml

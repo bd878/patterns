@@ -1,0 +1,47 @@
+@startuml
+hide empty members
+
+abstract class Figure {
+  {abstract} CreateManipulator()
+}
+
+object Client
+
+abstract class Manipulator {
+  {abstract} DownClick()
+  {abstract} Drag()
+  {abstract} UpClick()
+}
+
+class LineManipulator {
+  DownClick()
+  Drag()
+  UpClick()
+}
+
+class TextManipulator {
+  DownClick()
+  Drag()
+  UpClick()
+}
+
+class LineFigure {
+  CreateManipulator()
+}
+
+class TextFigure {
+  CreateManipulator()
+}
+
+Client -l-> Figure
+Client -r-> Manipulator
+
+LineFigure -u-|> Figure
+TextFigure -u-|> Figure
+
+LineManipulator -u-|> Manipulator
+TextManipulator -u-|> Manipulator
+
+LineFigure ..> LineManipulator::Drag
+TextFigure ..> TextManipulator::Drag
+@enduml

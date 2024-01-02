@@ -1,0 +1,80 @@
+@startuml
+
+skinparam {
+  groupInheritance 2
+  linetype rectangle
+  style strictuml
+  monochrome true
+}
+
+hide empty members
+title Паттерн "Prototype"
+header Диаграма музыкального редактора
+
+diamond " " as C1
+diamond " " as C2
+diamond " " as C3
+
+abstract class Tool {
+  {abstract} Manipulate()
+}
+
+abstract class Graphic {
+  {abstract} Draw(Position)
+  {abstract} Clone()
+}
+
+class RotateTool {
+  Manipulate()
+}
+
+class GraphicTool {
+  Manipulate()
+}
+
+note bottom of GraphicTool
+  p = prototype->Clone();
+  while (пользователь тащит мышь) {
+    p->Draw(new position);
+  }
+  вставить p в рисунок
+end note
+
+class Staff {
+  Draw(Position)
+  Clone()
+}
+
+abstract class MusicalNote {
+}
+
+class WholeNote {
+  Draw(Position)
+  Clone()
+}
+
+note bottom of WholeNote
+  Вернуть копию самого себя
+end note
+
+class HalfNote {
+  Draw(Position)
+  Clone()
+}
+
+note bottom of HalfNote
+  Вернуть копию самого себя
+end note
+
+GraphicTool "prototype" o-l-> Graphic : \t\t\t
+RotateTool -u- C1
+GraphicTool -u- C1
+C1 -u-|> Tool
+Staff -u- C2
+MusicalNote -u- C2
+C2 -u-|> Graphic
+WholeNote -u- C3
+HalfNote -u- C3
+C3 -u-|> MusicalNote
+
+@enduml

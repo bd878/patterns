@@ -1,0 +1,47 @@
+@startuml
+skinparam {
+  groupInheritance 2
+  linetype polyline 
+  style strictuml
+  monochrome true
+}
+
+hide empty members
+title Структура
+header Паттерн "Prototype"
+
+diamond " " as C
+
+abstract class Prototype {
+  {abstract} Clone()
+}
+
+class ConcretePrototype1 {
+  Clone()
+}
+
+note bottom of ConcretePrototype1
+  Вернуть копию самого себя
+end note
+
+class ConcretePrototype2 {
+  Clone()
+}
+
+note bottom of ConcretePrototype2
+  Вернуть копию самого себя
+end note
+
+class Client {
+  Operation()
+}
+
+note left of Client::Operation()
+  p = prototype->Clone()
+end note
+
+Client "prototype" -r-> Prototype : \t\t
+ConcretePrototype1 -u- C
+ConcretePrototype2 -u- C
+C -u-|> Prototype
+@enduml

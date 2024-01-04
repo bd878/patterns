@@ -1,11 +1,12 @@
 @startuml
 class Singleton {
-  static Instance()
+  .. Methods ..
+  {static} Instance()
   SingletonOperation()
   GetSingletonData()
-
-  static uniqueInstance
-  singletonData
+  .. Fields ..
+  -{static} uniqueInstance
+  -singletonData
 }
 
 note right of Singleton::Instance()

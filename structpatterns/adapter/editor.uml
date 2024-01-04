@@ -1,0 +1,49 @@
+@startuml
+hide empty members
+skinparam groupInheritance 2
+skinparam linetype polyline
+skinparam style strictuml
+
+diamond " " as C
+
+class DrawingEditor {
+}
+
+abstract class Shape {
+  {abstract} BoundingBox()
+  {abstract} CreateManipulator()
+}
+
+class TextView {
+  GetExtent()
+}
+
+class TextShape {
+  BoundingBox()
+  CreateManipulator()
+}
+
+class Line {
+  BoundingBox()
+  CreateManipulator()
+}
+
+note as N1
+  return text->GetExtent()
+end note
+
+note as N2
+  return new TextManipulator
+end note
+
+TextShape::BoundingBox .r. N1
+TextShape::CreateManipulator .r. N2
+N1 -[hidden]d- N2
+
+DrawingEditor -r-> Shape
+TextShape -u- C
+Line -u- C
+C -u-|> Shape
+TextShape "text" -u-> TextView
+Line -[hidden]r- TextShape
+@enduml

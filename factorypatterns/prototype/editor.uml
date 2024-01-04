@@ -66,7 +66,7 @@ note bottom of HalfNote
   Вернуть копию самого себя
 end note
 
-GraphicTool "prototype" o-l-> Graphic : \t\t\t
+GraphicTool "prototype" *-l-> Graphic : \t\t\t
 RotateTool -u- C1
 GraphicTool -u- C1
 C1 -u-|> Tool

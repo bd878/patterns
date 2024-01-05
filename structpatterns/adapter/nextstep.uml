@@ -1,0 +1,43 @@
+@startuml
+hide empty members
+
+header Пример использования Adapter в системе NEXTSTEP
+title Adapter
+
+abstract class "TreeDisplay(Client)" as TreeDisplay {
+  SetDelegate(Delegate)
+  Display()
+  BuildTree(Node n)
+}
+
+note as DelegateNote
+  delegate->GetChildren(this, n)
+  Для каждого потомка {
+    AddGraphicNode(
+      delete->CreateGraphicNode(this, child)
+    )
+    BuildTree(child)
+  }
+end note
+
+abstract class "TreeAccessorDelegate(Target)" as Delegate {
+  GetChildren(TreeDisplay, Node)
+  CreateGraphicNode(TreeDisplay, Node)
+}
+
+class "DirectoryBrowser(Adapter)" as BrowserClass {
+  GetChildren(TreeDisplay, Node)
+  CreateGraphicNode(TreeDisplay, Node)
+  CreateFile()
+  DeleteFile()
+}
+
+class "FileSystemEntity(Adaptee)" as FSClass {
+}
+
+TreeDisplay .d. DelegateNote
+BrowserClass -l-> TreeDisplay
+TreeDisplay "delegate" -r-> Delegate : \t\t\t
+BrowserClass -u-|> Delegate
+BrowserClass -d-> FSClass
+@enduml

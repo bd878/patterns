@@ -1,0 +1,30 @@
+@startuml
+hide empty members
+
+abstract class "TreeDisplay(Client, Target)" as TreeClass {
+  {abstract} GetChildren(Node)
+  {abstract} CreateGraphicNode(Node)
+  Display()
+  BuildTree(Node n)
+}
+
+class "DirectoryTreeDisplay(Adapter)" as TreeDisplay {
+  GetChildren(Node)
+  CreateGraphicNode(Node)
+}
+
+class "FileSystemEntity(Adaptee)" as FS {
+}
+
+note as ChildrenNote
+GetChildren(n)
+Для каждого потомка {
+  AddGraphicNode(CreateGraphicNode(child))
+  BuildTree(child)
+}
+end note
+
+TreeClass -u-|> TreeDisplay
+TreeClass .r. ChildrenNote
+TreeDisplay -r-> FS
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+class Client {
+}
+
+abstract class Target {
+  {abstract} Request()
+}
+
+class Adaptee {
+  SpecificRequest()
+}
+
+class Adapter {
+  Request()
+}
+@enduml

@@ -13,7 +13,7 @@ umlf="$1"
 pngf=$(echo "`dirname $umlf`/$imgdir/`basename $umlf`" | sed s/\.uml/\.png/g);
 echo "save in $pngf"
 
-java -jar "$puml" "$umlf" -o "$imgdir"
+java -Dplantuml.include.path="`dirname $umlf`" -jar "$puml" "$umlf" -o "$imgdir"
 [ $? -eq 0 ] && xviewer "$pngf" &
 
 exit 0;

@@ -1,0 +1,19 @@
+@startuml
+!include common.uml
+
+hide empty members
+skinparam style strictuml
+
+header Композиция объектов в паттерне "Adapter"
+title Adapter
+
+note as AdapteeNote
+  adaptee->SpecificRequest()
+end note
+
+Client -l-> Target
+Adapter -u-|> Target
+Adapter::Request .r. AdapteeNote
+AdapteeNote -[hidden]u- Adaptee
+Adapter "adaptee" -r-> Adaptee : \t\t\t
+@enduml

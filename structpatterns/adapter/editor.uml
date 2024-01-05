@@ -1,10 +1,16 @@
 @startuml
 hide empty members
-skinparam groupInheritance 2
-skinparam linetype polyline
-skinparam style strictuml
 
-diamond " " as C
+!procedure $init_class($name)
+  class $name {
+    $addCommonMethod()
+  }
+!endprocedure
+
+!procedure $addCommonMethod()
+  BoundingBox()
+  CreateManipulator()
+!endprocedure
 
 class DrawingEditor {
 }
@@ -18,15 +24,8 @@ class TextView {
   GetExtent()
 }
 
-class TextShape {
-  BoundingBox()
-  CreateManipulator()
-}
-
-class Line {
-  BoundingBox()
-  CreateManipulator()
-}
+$init_class("TextShape")
+$init_class("Line")
 
 note as N1
   return text->GetExtent()
@@ -41,9 +40,7 @@ TextShape::CreateManipulator .r. N2
 N1 -[hidden]d- N2
 
 DrawingEditor -r-> Shape
-TextShape -u- C
-Line -u- C
-C -u-|> Shape
+Line -[hidden]l- TextShape
+(TextShape, Line) -|> Shape
 TextShape "text" -u-> TextView
-Line -[hidden]r- TextShape
 @enduml

@@ -1,0 +1,20 @@
+@startuml
+!include common.uml
+
+hide empty members
+skinparam style strictuml
+
+header Структура паттерна "Adapter"
+title Adapter
+
+note as AdapterNote
+SpecificRequest()
+end note
+
+Adapter::Request .r. AdapterNote
+Client -l-> Target
+
+Adapter -u-|> Target
+Adapter "реализация" -u-|> Adaptee
+Target -[hidden]l- Adaptee
+@enduml

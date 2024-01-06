@@ -1,0 +1,34 @@
+@startuml
+hide empty members
+
+title Структура паттерна "Bridge"
+
+class RefinedAbstraction {
+}
+
+class ConcreteImplementorA {
+  OperationImp()
+}
+
+class ConcreteImplementorB {
+  OperationImp()
+}
+
+abstract class Implementor {
+  {abstract} OperationImp()
+}
+
+interface Abstraction {
+  Operation()
+}
+
+note as AbstractionNote
+  imp->OperationImp();
+end note
+
+Abstraction::Operation .. AbstractionNote
+Abstraction *-r-> Implementor
+RefinedAbstraction -u-|> Abstraction
+ConcreteImplementorA -u-|> Implementor
+ConcreteImplementorB -u-|> Implementor
+@enduml

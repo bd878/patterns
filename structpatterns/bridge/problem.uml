@@ -1,0 +1,29 @@
+@startuml
+skinparam groupInheritance 2
+
+hide empty members
+
+header Для новой платформы IconWindow нужно дублировать подклассы
+title Решение через наследование
+
+abstract class Window {
+}
+class IconWindow {
+}
+class XWindow {
+}
+class PMWindow {
+}
+
+class XIconWindow {
+}
+class PMIconWindow {
+}
+
+XWindow -u-|> Window
+PMWindow -u-|> Window
+IconWindow -u-|> Window
+
+XIconWindow -u-|> IconWindow
+PMIconWindow -u-|> IconWindow
+@enduml

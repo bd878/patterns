@@ -1,0 +1,61 @@
+@startuml
+skinparam groupInheritance 2
+skinparam packageStyle rectangle
+
+hide empty members
+
+header Паттерн мост
+title Bridge
+
+package Мост {
+  interface Window {
+    DrawText()
+    DrawRect()
+  }
+
+  abstract class WindowImp {
+    {abstract} DevDrawText()
+    {abstract} DevDrawLine()
+  }
+}
+
+interface IconWindow {
+  DrawBorder()
+}
+note bottom of IconWindow
+  DrawRect()
+  DrawText()
+end note
+
+interface TransientWindow {
+  DrawCloseBox()
+}
+note bottom of TransientWindow
+  DrawRect()
+end note
+
+class XWindowImp {
+  DevDrawText()
+  DevDrawLine()
+}
+
+class PMWindowImp {
+  DevDrawLine()
+  DevDrawText()
+}
+
+note right of XWindowImp::DevDrawText()
+  XDrawString()
+end note
+
+note right of XWindowImp::DevDrawLine()
+  XDrawLine()
+end note
+
+Window "imp" *-r-> WindowImp : \t\t\t
+IconWindow -u-|> Window
+TransientWindow -u-|> Window
+
+XWindowImp -u-|> WindowImp
+PMWindowImp -u-|> WindowImp
+@enduml

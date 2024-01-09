@@ -1,0 +1,48 @@
+@startuml
+skinparam linetype polyline
+hide empty members
+
+title Composite
+
+abstract class Graphic {
+  {abstract} Draw()
+  {abstract} Add(Graphic)
+  {abstract} Remove(Graphic)
+  {abstract} GetChild(int)
+}
+
+circle " " as C1
+
+class Line {
+  Draw()
+}
+class Rectangle {
+  Draw()
+}
+class Text {
+  Draw()
+}
+class Picture {
+  Draw()
+  Add(Graphic)
+  Remove(Graphic)
+  GetChild(int)
+}
+
+note right of Picture::Draw()
+  Для всех графических объектов g
+  g.Draw()
+end note
+
+note right of Picture::"Add(Graphic g)"
+  добавить g в список
+  графических объектов
+end note
+
+Graphic --o Picture : графические объекты
+Line -u- C1
+Rectangle -u- C1
+Text -u- C1
+Picture -u- C1
+C1 -u-|> Graphic
+@enduml

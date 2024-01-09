@@ -1,0 +1,39 @@
+@startuml
+hide empty members
+skinparam linetype ortho 
+
+class Client {
+}
+
+abstract class Component {
+  {abstract} Operation()
+  {abstract} Add(Component)
+  {abstract} Remove(Component)
+  {abstract} GetChild(int)
+}
+
+diamond " " as C
+
+class Leaf {
+  Operation()
+}
+
+class Composite {
+  Operation()
+  Add(Component)
+  Remove(Component)
+  GetChild(int) Operation()
+}
+
+note as OperationNote
+  Для всех потомков g
+    g.Operation();
+end note
+
+Client -l-> Component
+Leaf -u- C
+Composite -u- C
+C -u-|> Component
+Component --o "Потомки" Composite
+Composite::Operation .. OperationNote
+@enduml

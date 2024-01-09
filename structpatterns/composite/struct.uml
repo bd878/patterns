@@ -1,0 +1,9 @@
+@startmindmap
+* aPicture
+** aPicture
+*** aText
+*** aLine
+*** aRectangle
+** aLine
+** aRectangle
+@endmindmap

@@ -1,0 +1,53 @@
+@startuml
+hide empty members
+skinparam style strictuml
+skinparam linetype ortho
+
+abstract class VisualComponent {
+  {abstract} Draw()
+}
+
+diamond " " as C1
+diamond " " as C2
+
+class TextView {
+}
+
+abstract class Decorator {
+  {abstract} Draw()
+}
+
+note as DecoratorNote
+component->Draw()
+end note
+
+class ScrollDecorator {
+  Draw()
+  ScrollTo()
+  ..Fields..
+  scrollPosition
+}
+
+class BorderDecorator {
+  Draw()
+  DrawBorder()
+  ..Fields..
+  borderWidth
+}
+
+note as BorderNote
+Decorator::Draw();
+DrawBorder();
+end note
+
+VisualComponent --o "component" Decorator
+TextView -u- C1
+Decorator -u- C1
+C1 -u-|> VisualComponent
+
+Decorator::Draw .d. DecoratorNote
+ScrollDecorator -u- C2
+BorderDecorator -u- C2
+C2 -u-|> Decorator
+BorderDecorator::Draw .d. BorderNote
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+hide empty members
+skinparam style strictuml
+skinparam linetype ortho
+
+abstract class Component {
+  {abstract} Operation()
+}
+
+diamond " " as C1
+diamond " " as C2
+
+class ConcreteComponent {
+  Operation()
+}
+
+abstract class Decorator {
+  {abstract} Operation()
+}
+
+note as DecoratorNote
+component->Operation()
+end note
+
+class ConcreteDecoratorA {
+  Operation()
+}
+
+class ConcreteDecoratorB {
+  Operation()
+  AddedBehaviour()
+  ..Fields..
+  addedState
+}
+
+note as BNote
+Decorator::Operation();
+AddedBehaviour();
+end note
+
+Component --o "component" Decorator
+ConcreteComponent -u- C1
+Decorator -u- C1
+C1 -u-|> Component
+
+Decorator .. DecoratorNote
+ConcreteDecoratorA -u- C2
+ConcreteDecoratorB -u- C2
+C2 -u-|> Decorator
+ConcreteDecoratorB .. BNote
+@enduml

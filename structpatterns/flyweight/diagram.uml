@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+hide empty members
+hide methods 
+skinparam packageStyle rectangle
+
+package "Пул приспособленцев" {
+  class aConcreteFlyweight1 {
+    intrinsicState
+  }
+
+  class aConcreteFlyweight2 {
+    intrinsicState
+  }
+}
+
+class aClient1 {
+  {method} one
+  {method} two
+}
+
+class aClient2 {
+  {method} one
+  {method} two
+}
+
+class aFlyweightFactory {
+  flyweights
+}
+
+aFlyweightFactory::flyweights --> aConcreteFlyweight1
+aFlyweightFactory::flyweights --> aConcreteFlyweight2
+aClient1::one --> aConcreteFlyweight1
+aClient1::one --> aConcreteFlyweight2
+aClient2::two --> aConcreteFlyweight1
+@enduml

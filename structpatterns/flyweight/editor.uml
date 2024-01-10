@@ -1,0 +1,37 @@
+@startuml
+top to bottom direction
+
+hide empty members
+skinparam linetype ortho
+
+abstract class Glyph {
+  {abstract} Draw(Context)
+  {abstract} Intersects(Point, Context)
+}
+
+diamond " " as C
+
+class Row {
+  Draw(Context)
+  Intersects(Point, Context)
+}
+
+class Column {
+  Draw(Context)
+  Intersects(Point, Context)
+}
+
+class Character {
+  Draw(Context)
+  Intersects(Point, Context)
+  ..Fields..
+  char c
+}
+
+Row -- C
+Character -- C
+Column -- C
+C --|> Glyph
+Row "children" *--> Glyph
+Column "children" *--> Glyph
+@enduml

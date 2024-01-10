@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+hide empty members
+
+skinparam linetype ortho
+
+class FlyweightFactory {
+  GetFlyweight(key)
+}
+note bottom of FlyweightFactory
+if (flyweight[key] существует) {
+  Вернуть существующего
+    приспособленца;
+} else {
+  Создть нового приспособленца;
+  Добавить в пул;
+  Веррнуть нового приспособленца;
+}
+end note
+
+abstract class Flyweight {
+  {abstract} Operation(extrinsicState)
+}
+
+class Client {
+}
+
+class ConcreteFlyweight {
+  Operation(extrinsicState)
+  ..fields..
+  intrinsicState
+}
+
+class UnsharedConcreteFlyweight {
+  Operation(extrinsicState)
+  ..fields..
+  allState
+}
+
+FlyweightFactory "flyweights" *--> Flyweight
+Client -> FlyweightFactory
+Client --> UnsharedConcreteFlyweight
+Client --> ConcreteFlyweight
+ConcreteFlyweight -|> Flyweight
+UnsharedConcreteFlyweight -|> Flyweight
+@enduml

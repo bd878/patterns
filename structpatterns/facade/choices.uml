@@ -1,0 +1,60 @@
+@startuml
+top to bottom direction
+
+hide empty members
+skinparam linestyle polyline
+
+
+package "Каркас виртуальной памяти" {
+  class TwoLevelPageTable {
+  }
+
+  class PersistentStore {
+  }
+
+  class File {
+  }
+
+  class Disk {
+  }
+
+  diamond " " as C
+
+  class MemoryObjectCache {
+  }
+
+  class PagedMemoryObjectCache {
+  }
+
+  class AddressTranslation {
+    FindMemory(Address)
+  }
+
+  class MemoryObject {
+    BuildCache()
+  }
+}
+
+class Domain {
+  Add(Memory, Address)
+  Remove(Memory)
+  Protect(Memory, Protection)
+  RepairFault()
+}
+
+class Process {
+}
+
+Process --> Domain
+Domain::Remove *-d-> AddressTranslation
+Domain::Protect *-d-> MemoryObject
+
+TwoLevelPageTable -|> AddressTranslation
+PersistentStore -|> MemoryObject
+File - C
+Disk - C
+File -[hidden]u- Disk
+C -|> PersistentStore
+MemoryObject --> MemoryObjectCache
+PagedMemoryObjectCache -|> MemoryObjectCache
+@enduml

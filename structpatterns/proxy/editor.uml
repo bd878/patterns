@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+hide empty members
+skinparam linetype ortho
+skinparam style strictuml
+
+class DocumentEditor {
+}
+
+diamond " " as C
+
+abstract class Graphic {
+  {abstract} Draw()
+  {abstract} GetExtent()
+  {abstract} Store()
+  {abstract} Load()
+}
+
+class Image {
+  ..methods..
+  Draw()
+  GetExtent()
+  Store()
+  Load()
+  ..fields..
+  imageImp
+  extent
+}
+class ImageProxy {
+  ..methods..
+  Draw()
+  GetExtent()
+  Store()
+  Load()
+  ..fields..
+  fileName
+  extent
+}
+note as DrawNote
+  if (image) == 0 {
+    image = LoadImage(fileName)
+  }
+  image->Draw()
+end note
+note as ExtentNode
+  if (image == 0) {
+    return extent;
+  } else {
+    return image->GetExtent();
+  }
+end note
+
+ImageProxy::Draw .. DrawNote
+ImageProxy::GetExtent .. ExtentNode
+DocumentEditor -> Graphic
+Image -- C
+ImageProxy -- C
+C --|> Graphic
+ImageProxy ..> Image
+ImageProxy "image" --> Image
+@enduml

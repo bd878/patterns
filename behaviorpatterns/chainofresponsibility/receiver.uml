@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+object anOKButton {
+  Обработчик
+}
+object aPrintButton {
+  Обработчик
+}
+object aPrintDialog {
+  Обработчик
+}
+object aSaveDialog {
+  Обработчик
+}
+object anApplication {
+  Обработчик
+}
+aPrintButton --> aPrintDialog
+anOKButton --> aPrintDialog
+aSaveDialog --> anApplication
+aPrintDialog --> anApplication
+@enduml

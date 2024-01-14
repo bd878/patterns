@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+hide empty members
+abstract class HelpHandler {
+  {abstract} HandleHelp()
+}
+note as HelpNote
+  handler-->HandleHelp()
+end note
+HelpNote ..> HelpHandler::HandleHelp
+class Application {
+}
+abstract class Widget {
+}
+class Dialog {
+}
+class Button {
+  HandleHelp()
+  ShowHelp()
+}
+note as ButtonNote
+  if могу обработать {
+    ShowHelp()
+  } else {
+    Handler::HandleHelp()
+  }
+end note
+ButtonNote ..> Button::HandleHelp
+HelpHandler --> HelpHandler : "handler"
+Application --|> HelpHandler
+Widget --|> HelpHandler
+Dialog --|> Widget
+Button --|> Widget
+@enduml

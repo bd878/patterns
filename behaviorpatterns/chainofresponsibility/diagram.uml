@@ -1,0 +1,11 @@
+@startuml
+activate aPrintButton
+aPrintButton -> aPrintDialog : "HandleHelp()"
+activate aPrintDialog
+aPrintDialog -> anApplication : "HandleHelp()"
+activate anApplication
+
+deactivate anApplication
+deactivate aPrintDialog
+deactivate aPrintButton
+@enduml

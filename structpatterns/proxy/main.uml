@@ -1,0 +1,30 @@
+@startuml
+hide empty members
+
+class Client {
+}
+
+abstract class Subject {
+  {abstract} Request()
+}
+
+class RealSubject extends Subject {
+  ..methods..
+  Request()
+  ...
+}
+note as N1
+  ...
+  realSubject->Request();
+end note
+
+class Proxy extends Subject {
+  ..methods..
+  Request()
+  ...
+}
+
+Client --> Subject
+Proxy --> "realSubject" RealSubject
+Proxy::Request .. N1
+@enduml

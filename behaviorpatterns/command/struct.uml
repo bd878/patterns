@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+hide empty members
+class Client {
+}
+class Invoker {
+}
+abstract class Command {
+  {abstract} Execute()
+}
+class ConcreteCommand {
+  Execute()
+  ..fields..
+  Состояния
+}
+note as ConcreteNote
+  receiver->Action()
+end note
+ConcreteCommand .. ConcreteNote
+class Receiver {
+  Action()
+}
+ConcreteCommand --|> Command
+Invoker o--> Command
+Client --> Receiver
+Client .. ConcreteCommand
+ConcreteCommand "receiver" --> Receiver
+@enduml

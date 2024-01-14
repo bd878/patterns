@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+hide empty members
+
+abstract class Command {
+  {abstract} Execute()
+}
+class OpenCommand {
+  Execute()
+  AskUser()
+}
+note as OpenNote
+  name = AskUser()
+  doc = new Document(name)
+  application->Add(doc)
+  doc->Open()
+end note
+OpenCommand .. OpenNote
+
+class Application {
+  Add(Document)
+}
+
+OpenCommand "application" --> Application
+OpenCommand --|> Command
+@enduml

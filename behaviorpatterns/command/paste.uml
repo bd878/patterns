@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+hide empty members
+
+abstract class Command {
+  {abstract} Execute()
+}
+class PasteCommand {
+  Execute()
+}
+note as PasteNote
+  document->Paste()
+end note
+PasteCommand .. PasteNote
+class Document {
+  Open()
+  Close()
+  Cut()
+  Copy()
+  Paste()
+}
+
+PasteCommand --|> Command
+PasteCommand "документ" --> Document
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+participant aReceiver
+participant aClient
+participant aCommand
+participant anInvoker
+
+activate aClient
+aClient -> aCommand : "new Command(aReceiver)"
+activate aCommand
+deactivate aCommand
+aClient -> anInvoker : "StoreCommand(aCommand)"
+activate anInvoker
+deactivate aClient
+deactivate anInvoker
+
+anInvoker -> aCommand : "Execute()"
+activate anInvoker
+activate aCommand
+aCommand -> aReceiver : "Action()"
+activate aReceiver
+deactivate anInvoker
+deactivate aCommand
+deactivate aReceiver
+@enduml

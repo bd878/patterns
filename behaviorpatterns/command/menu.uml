@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+hide empty members
+
+class Application {
+  Add(Document)
+}
+class Menu {
+  Add(MenuItem)
+}
+class Document {
+  Open()
+  Close()
+  Cut()
+  Copy()
+  Paste()
+}
+class MenuItem {
+  Clicked()
+}
+note as ItemNote
+  command->Execute()
+end note
+ItemNote .. MenuItem::Clicked
+abstract class Command {
+  {abstract} Execute()
+}
+Application *--> Menu
+Application *--> Document
+Menu *--> MenuItem
+MenuItem "command" *--> Command
+@enduml

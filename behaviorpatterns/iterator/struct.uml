@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+hide empty members
+
+class Client {
+}
+
+abstract class Aggregate {
+  {abstract} CreateIterator()
+}
+
+abstract class Iterator {
+  {abstract} First()
+  {abstract} Next()
+  {abstract} IsDone()
+  {abstract} CurrentItem()
+}
+
+class ConcreteAggregate {
+  CreateIterator()
+}
+note as AggregateNote
+return new ConcreteIterator(this)
+end note
+
+class ConcreteIterator {
+}
+
+ConcreteAggregate ..> ConcreteIterator
+ConcreteAggregate <-- ConcreteIterator
+
+ConcreteAggregate .. AggregateNote
+
+ConcreteAggregate -|> Aggregate
+ConcreteIterator -|> Iterator
+Client --> Aggregate
+Client --> Iterator
+@enduml

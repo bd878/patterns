@@ -1,0 +1,29 @@
+@startuml
+top to bottom direction
+hide empty members
+
+class Client {
+}
+
+class Context {
+}
+
+abstract class AbstractExpression {
+  Interpret(Context)
+}
+
+class TerminalExpression {
+  Interpret(Context)
+}
+
+class NonterminalExpression {
+  Interpret(Context)
+}
+
+TerminalExpression --|> AbstractExpression
+NonterminalExpression --|> AbstractExpression
+NonterminalExpression o--> AbstractExpression
+
+Client --> AbstractExpression
+Client --> Context
+@enduml

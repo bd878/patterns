@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+hide empty members
+skinparam linetype polyline
+
+abstract class DialogDirector {
+  ShowDialog()
+  {abstract} CreateWidgets()
+  {abstract} WidgetChanged(Widget)
+}
+
+class FontDialogDirector {
+  CreateWidgets()
+  WidgetChanged(Widget)
+}
+
+abstract class Widget {
+  Changed()
+}
+note as ChangedNote
+  director->WidgetChanged(this)
+end note
+
+class ListBox {
+  GetSelection()
+}
+class EntryField {
+  SetText()
+}
+ListBox --|> Widget
+EntryField --|> Widget
+
+Widget::Changed -- ChangedNote
+FontDialogDirector "список" -> ListBox
+FontDialogDirector "поле ввода" -> EntryField
+FontDialogDirector --|> DialogDirector
+
+Widget "director" -> DialogDirector
+@enduml

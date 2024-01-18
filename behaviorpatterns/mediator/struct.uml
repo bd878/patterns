@@ -1,0 +1,28 @@
+@startuml
+top to bottom direction
+hide empty members
+skinparam linetype ortho
+
+abstract class Mediator {
+}
+
+class ConcreteMediator {
+}
+
+abstract class Colleague {
+}
+
+class ConcreteColleague1 {
+}
+class ConcreteColleague2 {
+}
+
+ConcreteMediator "Посредник" -> Mediator
+ConcreteMediator --|> Mediator
+
+ConcreteColleague1 --|> Colleague
+ConcreteColleague2 --|> Colleague
+
+ConcreteMediator -> ConcreteColleague1
+ConcreteMediator -> ConcreteColleague2
+@enduml

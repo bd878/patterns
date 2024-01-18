@@ -1,0 +1,30 @@
+@startuml
+hide empty members
+
+object aClient {
+  Распорядитель
+}
+
+object aButton {
+  Распорядитель
+}
+
+object aFontDialogDirector {
+}
+
+object aListBox {
+  Распорядитель
+}
+
+object anEntryField {
+  Распорядитель
+}
+
+aClient --> aFontDialogDirector
+aListBox --> aFontDialogDirector
+aFontDialogDirector --> aListBox
+aFontDialogDirector --> aButton
+aButton --> aFontDialogDirector
+aFontDialogDirector --> anEntryField
+anEntryField --> aFontDialogDirector
+@enduml

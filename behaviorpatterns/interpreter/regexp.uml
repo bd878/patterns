@@ -1,0 +1,42 @@
+@startuml
+top to bottom direction
+
+hide empty members
+skinparam linetype ortho
+
+abstract class RegularExpression {
+  {abstract} Interpret()
+}
+
+diamond " " as C
+
+class LiteralExpression {
+  Interpret()
+  ..field..
+  literal
+}
+
+class SequenceExpression {
+  Interpret()
+}
+
+class RepetitionExpression {
+  Interpret()
+}
+
+class AlternationExpression {
+  Interpret()
+}
+
+LiteralExpression -u- C
+RepetitionExpression -u- C
+SequenceExpression -u- C
+AlternationExpression -u- C
+C -u-|> RegularExpression
+
+RepetitionExpression "повторение" o-> RegularExpression
+SequenceExpression "выражение1" o-> RegularExpression
+SequenceExpression "выражение2" o-> RegularExpression
+AlternationExpression "альтернатива1" o-> RegularExpression
+AlternationExpression "альтернатива2" o-> RegularExpression
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+hide empty members
+
+header Выражение "raining & (dogs | cats) *"
+
+object aSequenceExpression {
+  Выражение1
+  Выражение2
+}
+
+object aLiteralExpression3 {
+  "raining"
+}
+
+object aRepetitionExpression {
+  Повторить
+}
+
+object anAlternationExpression {
+  Альтернатива1
+  Альтернатива2
+}
+
+object aLiteralExpression1 {
+  "dogs"
+}
+
+object aLiteralExpression2 {
+  "cats"
+}
+aSequenceExpression::Выражение1 -> aRepetitionExpression
+aSequenceExpression::Выражение2 -> aLiteralExpression3
+aRepetitionExpression -> anAlternationExpression
+anAlternationExpression::Альтернатива1 -> aLiteralExpression1
+anAlternationExpression::Альтернатива2 -> aLiteralExpression2
+@enduml

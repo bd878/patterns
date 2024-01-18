@@ -1,0 +1,28 @@
+@startuml
+participant aClient
+participant aFontDialogDirector
+
+participant aListBox
+participant anEntryField
+
+aClient -> aFontDialogDirector : ShowDialog()
+activate aClient
+activate aFontDialogDirector
+
+deactivate aFontDialogDirector
+deactivate aClient
+aListBox -> aFontDialogDirector : WidgetChanged()
+activate aListBox
+activate aFontDialogDirector
+
+deactivate aListBox
+aFontDialogDirector -> aListBox : GetSelection()
+activate aListBox
+
+deactivate aListBox
+aFontDialogDirector -> anEntryField : SeeText()
+activate anEntryField
+
+deactivate anEntryField
+deactivate aFontDialogDirector
+@enduml

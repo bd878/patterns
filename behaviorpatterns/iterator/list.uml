@@ -1,0 +1,48 @@
+@startuml
+top to bottom direction
+hide empty members
+skinparam linetype ortho
+
+class Client {
+}
+
+abstract class AbstractList {
+  {abstract} CreateIterator()
+  {abstract} Count()
+  {abstract} Append(Item)
+  {abstract} Remove(Item)
+  "..."
+}
+
+abstract class Iterator {
+  {abstract} First()
+  {abstract} Next()
+  {abstract} IsDone()
+  {abstract} CurrentItem()
+}
+
+class SkipList {
+}
+class List {
+}
+
+class ListIterator {
+}
+class SkipListIterator {
+}
+
+Client --> AbstractList
+Client --> Iterator
+
+SkipList -|> AbstractList
+List -|> AbstractList
+
+ListIterator -|> Iterator
+SkipListIterator -|> Iterator
+
+List <-- ListIterator
+List ..> ListIterator
+
+SkipList ..> SkipListIterator
+SkipList <-- SkipListIterator
+@enduml

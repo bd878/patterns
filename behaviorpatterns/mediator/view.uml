@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam linetype polyline
+
+object aTextPane {
+  Владелец
+}
+object aListBox {
+  Владелец
+}
+object aButton {
+  Владелец
+}
+object aViewManager {
+  textPane
+  listBox
+  button
+}
+
+aTextPane -[hidden]- aButton
+
+aTextPane::Владелец -u-> aViewManager
+aViewManager::textPane --> aTextPane
+
+aListBox::Владелец --> aViewManager
+aViewManager::listBox --> aListBox
+
+aButton::Владелец --> aViewManager
+aViewManager::button --> aButton
+@enduml

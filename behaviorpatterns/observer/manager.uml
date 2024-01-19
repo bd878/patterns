@@ -1,0 +1,61 @@
+@startuml
+hide empty members
+
+class Subject {
+  Attach(Observer)
+  Detach(Observer)
+  Notify()
+}
+note as NotifyNote
+chman->Notify()
+end note
+
+note as RegisterNote
+chman->Register(this, o)
+end note
+
+abstract class ChangeManager {
+  {abstract} Register(Subject, Observer)
+  {abstract} Unregister(Subject, Observer)
+  {abstract} Notify()
+  ..fields..
+  Subject-Observer mapping
+}
+
+class Observer {
+  {abstract} Update(Subject)
+}
+
+class SimpleChangeManager {
+  Register(Subject, Observer)
+  Unregister(Subject, Observer)
+  Notify()
+}
+note as SimpleNote
+для всех субъектов s
+  для всех наблюдателей o в s
+    o->Update(s)
+end note
+SimpleChangeManager .. SimpleNote
+
+class DAGChangeManager {
+  Register(Subject, Observer)
+  Unregister(Subject, Observer)
+  Notify()
+}
+note as DAGNote
+пометить всех наблюдателей
+для обновления
+Обновить всех помеченных наблюдателей
+end note
+DAGChangeManager .. DAGNote
+
+SimpleChangeManager --|> ChangeManager
+DAGChangeManager --|> ChangeManager
+ChangeManager "observers" -r-> Observer : \t\t
+ChangeManager "subjects" -l-> Subject : \t\t
+Subject "chman" -r-> ChangeManager
+
+Subject::Notify .. NotifyNote
+Subject::Register .. RegisterNote
+@enduml

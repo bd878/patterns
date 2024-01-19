@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+hide empty members
+
+abstract class Subject {
+  Attach(Observer)
+  Detach(Observer)
+  Notify()
+}
+note as UpdateNote
+для всех наблюдателей o {
+  o->Update()
+}
+end note
+
+abstract class Observer {
+  {abstract} Update()
+}
+
+class ConcreteSubject {
+  GetState()
+  SetState()
+  ..fields..
+  subjectState
+}
+note as SubjectNote
+return subjectState
+end note
+
+class ConcreteObserver {
+  Update()
+  ..fields..
+  observerState
+}
+note as StateNote
+observerState = subject->GetState()
+end note
+
+Subject::Notify .. UpdateNote
+ConcreteSubject::GetState .. SubjectNote
+ConcreteObserver::Update .. StateNote
+
+Subject "observers" -> Observer
+ConcreteSubject --|> Subject
+ConcreteObserver --|> Observer
+ConcreteObserver "subject" -> ConcreteSubject
+@enduml

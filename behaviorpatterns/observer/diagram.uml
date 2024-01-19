@@ -1,0 +1,22 @@
+@startuml
+participant aConcreteSubject
+participant aConcreteObserver
+participant anotherConcreteObserver
+
+activate aConcreteSubject
+activate aConcreteObserver
+aConcreteObserver -> aConcreteSubject : SetState()
+deactivate aConcreteObserver
+
+aConcreteSubject -> aConcreteSubject : Notify()
+activate aConcreteObserver
+aConcreteSubject -> aConcreteObserver : Update()
+aConcreteObserver -> aConcreteSubject : GetState()
+deactivate aConcreteObserver
+
+activate anotherConcreteObserver
+aConcreteSubject -> anotherConcreteObserver : Update()
+anotherConcreteObserver -> aConcreteSubject : GetState()
+deactivate anotherConcreteObserver
+deactivate aConcreteSubject
+@enduml

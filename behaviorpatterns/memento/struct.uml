@@ -1,0 +1,33 @@
+@startuml
+hide empty members
+
+class Originator {
+  SetMemento(Memento m)
+  CreateMemento()
+  ..fields..
+  state
+}
+note as ConstructorNote
+return new Memento(state)
+end note
+
+note as GetStateNote
+state = m->GetState()
+end note
+
+class Memento {
+  GetState()
+  SetState()
+  ..fields..
+  state
+}
+
+class CareTaker {
+}
+
+Originator::SetMemento .. GetStateNote
+Originator::CreateMemento .. ConstructorNote
+
+Originator .> Memento
+CareTaker "хранитель" o-l-> Memento : \t\t\t
+@enduml

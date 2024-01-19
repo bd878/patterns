@@ -1,0 +1,27 @@
+@startuml
+participant aCaretaker
+participant anOriginator
+participant aMemento
+
+activate aCaretaker
+activate anOriginator
+activate aMemento
+aCaretaker -> anOriginator : "CreateMemento()"
+anOriginator -> aMemento : "new Memento"
+deactivate aMemento 
+
+anOriginator -> aMemento : "SetState()"
+activate aMemento
+deactivate aMemento 
+deactivate anOriginator
+deactivate aCaretaker
+
+aCaretaker -> anOriginator : "SetMemento(aMemento)"
+activate anOriginator
+activate aCaretaker
+activate aMemento
+anOriginator -> aMemento : "GetState()"
+deactivate aMemento
+deactivate anOriginator
+deactivate aCaretaker
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+hide empty members
+
+class Client {
+}
+
+abstract class Visitor {
+  {abstract} VisitConcreteElementA(ConcreteElementA)
+  {abstract} VisitConcreteElementB(ConcreteElementB)
+}
+class ConcreteVisitor1 extends Visitor {
+  VisitConcreteElementA(ConcreteElementA)
+  VisitConcreteElementB(ConcreteElementB)
+}
+class ConcreteVisitor2 extends Visitor {
+  VisitConcreteElementA(ConcreteElementA)
+  VisitConcreteElementB(ConcreteElementB)
+}
+
+Client --> Visitor
+Client --> ObjectStructure
+
+class ObjectStructure {
+}
+ObjectStructure --> Element
+abstract class Element {
+  {abstract} Accept(Visitor)
+}
+class ConcreteElementA extends Element {
+  Accept(Visitor v)
+  OperationA()
+}
+note as ANote
+v->VisitConcreteElementA(this)
+end note
+ANote -- ConcreteElementA
+
+class ConcreteElementB extends Element {
+  Accept(Visitor v)
+  OperationB()
+}
+note as BNote
+v->VisitConcreteElementB(this)
+end note
+BNote -- ConcreteElementB
+@enduml

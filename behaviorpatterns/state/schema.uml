@@ -1,0 +1,26 @@
+@startuml
+top to bottom direction
+hide empty members
+
+class Context {
+  Request()
+}
+note as HandleNote
+state->Handle()
+end note
+Context::Request -l-> HandleNote
+
+abstract class State {
+  {abstract} Handle()
+}
+class ConcreteStateA {
+  Handle()
+}
+class ConcreteStateB {
+  Handle()
+}
+
+Context "state" o-> State : \t\t
+ConcreteStateA --|> State
+ConcreteStateB --|> State
+@enduml

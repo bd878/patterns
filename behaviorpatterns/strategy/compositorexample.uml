@@ -1,0 +1,31 @@
+@startuml
+hide empty members
+
+class Composition {
+  Traverse()
+  Repair()
+}
+note as ComposeNote
+compositor->Compose()
+end note
+Composition -l- ComposeNote
+
+abstract class Compositor {
+  {abstract} Compose()
+}
+
+class SimpleCompositor {
+  Compose()
+}
+class TeXCompositor {
+  Compose()
+}
+class ArrayCompositor {
+  Compose()
+}
+
+SimpleCompositor --|> Compositor
+TeXCompositor --|> Compositor
+ArrayCompositor --|> Compositor
+Composition "compositor" o-> Compositor : \t\t
+@enduml

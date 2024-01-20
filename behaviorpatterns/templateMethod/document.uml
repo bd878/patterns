@@ -1,0 +1,34 @@
+@startuml
+hide empty members
+
+abstract class Document {
+  Save()
+  Open()
+  Close()
+  {abstract} DoRead()
+}
+
+abstract class Application {
+  AddDocument()
+  OpenDocument()
+  {abstract} DoCreateDocument()
+  {abstract} CanOpenDocument()
+  {abstract} AboutToOpenDocument()
+}
+
+class MyDocument extends Document {
+  DoRead()
+}
+class MyApplication extends Application {
+  DoCreateDocument()
+  CanOpenDocument()
+  AboutToOpenDocument()
+}
+note as NewDocumentNote
+return new MyDocument
+end note
+MyApplication::DoCreateDocument -l- NewDocumentNote
+
+MyApplication ..> MyDocument
+Application "docs" o--> Document : \t\t
+@enduml

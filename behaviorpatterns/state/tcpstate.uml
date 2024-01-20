@@ -1,0 +1,40 @@
+@startuml
+top to bottom direction
+skinparam groupInheritance 3
+hide empty members
+
+class TCPConnection {
+  Open()
+  Close()
+  Acknowledge()
+}
+note as OpenNote
+state->Open()
+end note
+TCPConnection -l-> OpenNote
+
+abstract class TCPState {
+  {abstract} Open()
+  {abstract} Close()
+  {abstract} Acknowledge()
+}
+class TCPEstablished {
+  Open()
+  Close()
+  Acknowledge()
+}
+class TCPListen {
+  Open()
+  Close()
+  Acknowledge()
+}
+class TCPClosed {
+  Open()
+  Close()
+  Acknowledge()
+}
+TCPEstablished --|> TCPState
+TCPListen --|> TCPState
+TCPClosed --|> TCPState
+TCPConnection "state" o-> TCPState : \t\t
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+hide empty members
+
+abstract class AbstractClass {
+  TemplateMethod()
+  {abstract} PrimitiveOperation1()
+  {abstract} PrimitiveOperation2()
+}
+note as OperationsNote
+...
+PrimitiveOperation1()
+...
+PrimitiveOperation2()
+end note
+AbstractClass::TemplateMethod -- OperationsNote
+
+class ConcreteClass extends AbstractClass {
+  PrimitiveOperation1()
+  PrimitiveOperation2()
+}
+@enduml

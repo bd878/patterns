@@ -1,0 +1,31 @@
+@startuml
+top to bottom direction
+hide empty members
+
+class DrawingController {
+  MousePressed()
+  ProcessKeyboard()
+  Initialize()
+}
+
+abstract class Tool {
+  {abstract} HandleMousePress()
+  {abstract} HandleMouseRelease()
+  {abstract} HandleCharacter()
+  {abstract} GetCursor()
+  {abstract} Activate()
+}
+
+class CreationTool {
+}
+class SelectionTool {
+}
+class TextTool {
+}
+
+CreationTool --|> Tool
+SelectionTool --|> Tool
+TextTool --|> Tool
+
+DrawingController "currentTool" o--> Tool
+@enduml

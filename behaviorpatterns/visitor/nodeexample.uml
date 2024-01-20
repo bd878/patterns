@@ -1,0 +1,39 @@
+@startuml
+hide empty members
+
+abstract class NodeVisitor {
+  {abstract} VisitAssignment(AssignmentNode)
+  {abstract} VisitVariableRef(VariableRefNode)
+}
+
+class TypeCheckingVisitor extends NodeVisitor {
+  VisitAssignment(AssignmentNode)
+  VisitVariableRef(VariableRefNode)
+}
+class CodeGeneratingVisitor extends NodeVisitor {
+  VisitAssignment(AssignmentNode)
+  VisitVariableRef(VariableRefNode)
+}
+
+class Program {
+}
+Program o--> Node
+abstract class Node {
+  {abstract} Accept(NodeVisitor)
+}
+class AssignmentNode extends Node {
+  Accept(NodeVisitor v)
+}
+note as AssignmentNote
+v->VisitAssignment(this)
+end note
+AssignmentNode -- AssignmentNote
+
+class VariableRefNode extends Node {
+  Accept(NodeVisitor v)
+}
+note as VariableRefNote
+v->VisitVariableRef(this)
+end note
+VariableRefNode -- VariableRefNote
+@enduml

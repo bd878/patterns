@@ -1,0 +1,32 @@
+@startuml
+participant anObjectStructure
+participant aConcreteElementA
+participant aConcreteElementB
+participant aConcreteVisitor
+
+activate anObjectStructure
+activate aConcreteElementA
+anObjectStructure -> aConcreteElementA : Accept(aVisitor)
+
+activate aConcreteVisitor
+aConcreteElementA -> aConcreteVisitor : VisitConcreteElementA(aConcreteElementA)
+deactivate aConcreteElementA
+
+aConcreteVisitor -> aConcreteElementA : OperationA()
+activate aConcreteElementA
+deactivate aConcreteElementA
+deactivate aConcreteVisitor
+
+anObjectStructure -> aConcreteElementB : Accept(aVisitor)
+activate aConcreteElementB
+
+aConcreteElementB -> aConcreteVisitor : VisitConcreteElementB(aConcreteElementB)
+deactivate aConcreteElementB
+activate aConcreteVisitor
+aConcreteVisitor -> aConcreteElementB : OperationB()
+activate aConcreteElementB
+
+deactivate aConcreteElementB
+deactivate aConcreteVisitor
+deactivate anObjectStructure
+@enduml
